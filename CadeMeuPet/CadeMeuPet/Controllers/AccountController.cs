@@ -17,17 +17,25 @@ namespace CadeMeuPet.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new ResultViewModel<string>(ModelState.GetErros()));
 
+            Response response = new();
+
             try
             {
-                AccountBusiness oAccountBusiness = new AccountBusiness();
-                oAccountBusiness.CreateAccount(model);
-            }
-            catch (Exception)
-            {
+                AccountBusiness oAccountBusiness = new(context);
+                response = await oAccountBusiness.CreateAccount(model);
 
-                throw;
+                if(response.HasError)
+                    return BadRequest(response.MsgReturn);
+
+                else
+                    return Ok(response.MsgReturn.ToString());   
             }
-            return Ok();
+            catch (Exception ex)
+            {
+                response.HasError = true;
+                response.MsgReturn = "Houve um erro ao tentar realizar a chamada na API Accounts. Msg: " + ex.Message;
+                return BadRequest(response.MsgReturn);
+            }
         }
     }
 }

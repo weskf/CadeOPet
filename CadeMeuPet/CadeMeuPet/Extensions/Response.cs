@@ -4,7 +4,7 @@
     {
         private static bool _HasError;
 
-        public bool HasError{ get => _HasError; set => _HasError = false; }
-        public string MsgReturn { get; set; }        
+        public bool HasError { get; set; }
+        public string MsgReturn { get; set; }
     }
 }

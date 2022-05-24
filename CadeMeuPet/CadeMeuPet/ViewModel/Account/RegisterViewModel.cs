@@ -19,6 +19,9 @@ namespace CadeMeuPet.ViewModel
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail em formato inválido.")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Telefone é obrigatório")]
+        public string Telefone { get; set; }
+
         [Required(ErrorMessage = "Senha é obrigatório")]
         public string Password { get; set; }
 

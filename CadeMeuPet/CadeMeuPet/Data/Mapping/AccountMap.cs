@@ -32,6 +32,12 @@ namespace CadeMeuPet.Data.Mapping
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
+            builder.Property(x => x.Telefone)
+                .IsRequired()
+                .HasColumnName("Telefone")
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(15);
+
             builder.Property(x => x.CPF)
                 .HasColumnName("CPF")
                 .HasColumnType("NVARCHAR")

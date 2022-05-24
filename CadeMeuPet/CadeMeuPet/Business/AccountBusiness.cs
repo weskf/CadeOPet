@@ -27,6 +27,7 @@ namespace CadeMeuPet.Business
                     FullName = account.FullName,
                     CPF = account.CPF,
                     Email = account.Email,
+                    Telefone = account.Telefone,
                     User = account.User,
                     Password = account.Password,
                     ConfirmPassword = account.ConfirmPassword

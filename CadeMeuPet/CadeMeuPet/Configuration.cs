@@ -1,4 +1,4 @@
-﻿namespace CadeMeuPet.Extensions
+﻿namespace CadeMeuPet
 {
     public static class Configuration
     {

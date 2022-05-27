@@ -59,3 +59,4 @@ C:\_Wfrohlich\Projetos\CadeMeuPet\CadeMeuPet\CadeMeuPet\obj\Debug\net6.0\CadeMeu
 C:\_Wfrohlich\Projetos\CadeMeuPet\CadeMeuPet\CadeMeuPet\obj\Debug\net6.0\ref\CadeMeuPet.dll
 C:\_Wfrohlich\Projetos\CadeMeuPet\CadeMeuPet\CadeMeuPet\obj\Debug\net6.0\CadeMeuPet.pdb
 C:\_Wfrohlich\Projetos\CadeMeuPet\CadeMeuPet\CadeMeuPet\obj\Debug\net6.0\CadeMeuPet.genruntimeconfig.cache
+C:\_Wfrohlich\Projetos\CadeMeuPet\CadeMeuPet\CadeMeuPet\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

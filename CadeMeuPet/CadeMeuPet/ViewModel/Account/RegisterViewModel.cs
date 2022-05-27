@@ -4,6 +4,8 @@ namespace CadeMeuPet.ViewModel
 {
     public class RegisterViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Nome é obrigatório")]
         public string Name { get; set; }
 

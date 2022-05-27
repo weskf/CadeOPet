@@ -6,5 +6,6 @@
 
         public bool HasError { get; set; }
         public string MsgReturn { get; set; }
+        public object Dados { get; set; }
     }
 }

@@ -4,6 +4,8 @@ namespace CadeMeuPet.ViewModel
 {
     public class RegisterViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Nome é obrigatório")]
         public string Name { get; set; }
 
@@ -18,6 +20,9 @@ namespace CadeMeuPet.ViewModel
         [Required(ErrorMessage = "E-mail é obrigatório")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail em formato inválido.")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Telefone é obrigatório")]
+        public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Senha é obrigatório")]
         public string Password { get; set; }

@@ -16,6 +16,12 @@ namespace CadeMeuPet.Data
         protected override void OnModelCreating(ModelBuilder model)
         {
             model.ApplyConfiguration(new AccountMap());
+            model.ApplyConfiguration(new PetMap());
+            model.ApplyConfiguration(new BreedMap());
+            model.ApplyConfiguration(new ColorMap());
+            model.ApplyConfiguration(new SizeMap());
+            model.ApplyConfiguration(new StatusMap());
+            model.ApplyConfiguration(new ImageMap());
         }
     }
 }

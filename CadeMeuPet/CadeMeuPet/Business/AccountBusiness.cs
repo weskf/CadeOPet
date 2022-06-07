@@ -57,13 +57,13 @@ namespace CadeMeuPet.Business
             }
         }
 
-        public async Task<Response> UpdateAccount(RegisterViewModel account)
+        public async Task<Response> UpdateAccount(int Id, RegisterViewModel account)
         {
             Response response = new();
 
             try
             {
-                var user = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == account.Id);
+                var user = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == Id);
                 if (user == null)
                 {
                     response.HasError = true;
@@ -140,11 +140,11 @@ namespace CadeMeuPet.Business
                 if (response.HasError)
                     return response;
 
-                var user = await _context.Accounts.FirstOrDefaultAsync(x => x.User == account.User);
+                var user = await _context.Accounts.FirstOrDefaultAsync(x => x.CPF == account.CPF);
                 if (user != null)
                 {
                     response.HasError = true;
-                    response.MsgReturn = "Usuário já está cadastrado";
+                    response.MsgReturn = "CPF já está cadastrado";
                 }
                 else
                     response.HasError = false;

@@ -9,7 +9,7 @@ namespace CadeMeuPet.Data.Mapping
         public void Configure(EntityTypeBuilder<Pet> builder)
         {
 
-            builder.ToTable("Pet");
+            builder.ToTable("Tb_Pet");
 
             builder.HasKey(x => x.Id);
 
@@ -26,31 +26,36 @@ namespace CadeMeuPet.Data.Mapping
                .HasOne<Breed>(p => p.PetBreed)
                .WithOne(x => x.Pet)
                .HasForeignKey<Pet>(f => f.BreedId)
-               .HasConstraintName("FK_Pet_Breed");
+               .HasConstraintName("FK_Pet_Breed")
+               .OnDelete(DeleteBehavior.Cascade);
 
             builder
               .HasOne<Color>(p => p.Color)
               .WithOne(x => x.Pet)
               .HasForeignKey<Pet>(f => f.ColorId)
-              .HasConstraintName("FK_Pet_Color");
+              .HasConstraintName("FK_Pet_Color")
+              .OnDelete(DeleteBehavior.Cascade);
 
             builder
               .HasOne<Size>(p => p.Size)
               .WithOne(x => x.Pet)
               .HasForeignKey<Pet>(f => f.SizeId)
-              .HasConstraintName("FK_Pet_Size");
+              .HasConstraintName("FK_Pet_Size")
+              .OnDelete(DeleteBehavior.Cascade);
 
             builder
              .HasMany<Image>(p => p.Images)
              .WithOne(x => x.Pet)
              //             .HasForeignKey<Image>(f => f.Id)
-             .HasConstraintName("FK_Pet_Images");
+             .HasConstraintName("FK_Pet_Images")
+             .OnDelete(DeleteBehavior.Cascade);
 
             builder
              .HasOne<Status>(p => p.Status)
              .WithOne(x => x.Pet)
              .HasForeignKey<Pet>(f => f.StatusId)
-             .HasConstraintName("FK_Pet_Status");
+             .HasConstraintName("FK_Pet_Status")
+             .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

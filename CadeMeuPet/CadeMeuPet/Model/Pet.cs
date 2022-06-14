@@ -17,6 +17,9 @@ namespace CadeMeuPet.Model
         public virtual Status Status { get; set; }
         public int ImageId { get; set; }
         public virtual IList<Image> Images { get; set; }
+        public int AddressId { get; set; }
+        public virtual Address Address { get; set; }
+
     }
 
     public class Breed

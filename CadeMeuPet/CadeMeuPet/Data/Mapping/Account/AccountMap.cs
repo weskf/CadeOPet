@@ -8,6 +8,8 @@ namespace CadeMeuPet.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
+            builder.ToTable("Tb_Account");
+
             builder.HasKey(x => x.Id);
             
             builder.Property(x => x.Id)

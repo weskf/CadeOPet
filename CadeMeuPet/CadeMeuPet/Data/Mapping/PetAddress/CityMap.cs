@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CadeMeuPet.Data.Mapping
+namespace CadeMeuPet.Data.Mapping.PetAddress
 {
-    public class BreedMap : IEntityTypeConfiguration<Breed>
+    public class CityMap : IEntityTypeConfiguration<City>
     {
-        public void Configure(EntityTypeBuilder<Breed> builder)
+        public void Configure(EntityTypeBuilder<City> builder)
         {
 
-            builder.ToTable("Breed");
+            builder.ToTable("Tb_City");
 
             builder.HasKey(x => x.Id);
 
@@ -22,6 +22,14 @@ namespace CadeMeuPet.Data.Mapping
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(120);
 
+            builder
+               .HasMany<State>(p => p.States)
+               .WithOne(x => x.City)
+               //.HasForeignKey<City>(f => f.StateId)
+               .HasConstraintName("FK_City_States")
+               .OnDelete(DeleteBehavior.Cascade);
+
         }
+
     }
 }

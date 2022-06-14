@@ -9,7 +9,7 @@ namespace CadeMeuPet.Data.Mapping
         public void Configure(EntityTypeBuilder<Image> builder)
         {
 
-            builder.ToTable("Image");
+            builder.ToTable("Tb_Image");
 
             builder.HasKey(x => x.Id);
 

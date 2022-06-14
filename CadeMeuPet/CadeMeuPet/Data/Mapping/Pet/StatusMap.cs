@@ -7,7 +7,7 @@ public class StatusMap : IEntityTypeConfiguration<Status>
     public void Configure(EntityTypeBuilder<Status> builder)
     {
 
-        builder.ToTable("Status");
+        builder.ToTable("Tb_Status");
 
         builder.HasKey(x => x.Id);
 

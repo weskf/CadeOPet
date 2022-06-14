@@ -9,7 +9,7 @@ namespace CadeMeuPet.Data.Mapping
         public void Configure(EntityTypeBuilder<Color> builder)
         {
 
-            builder.ToTable("Color");
+            builder.ToTable("Tb_Color");
 
             builder.HasKey(x => x.Id);
 

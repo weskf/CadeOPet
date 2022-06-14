@@ -4,14 +4,15 @@
 
 namespace CadeMeuPet.Migrations
 {
-    public partial class IncluindoCampoTelefone : Migration
+    public partial class UpdateTable_Tb_state : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Telefone",
-                table: "Accounts",
-                type: "nvarchar(max)",
+                name: "UF",
+                table: "Tb_State",
+                type: "NVARCHAR(2)",
+                maxLength: 2,
                 nullable: false,
                 defaultValue: "");
         }
@@ -19,8 +20,8 @@ namespace CadeMeuPet.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Telefone",
-                table: "Accounts");
+                name: "UF",
+                table: "Tb_State");
         }
     }
 }

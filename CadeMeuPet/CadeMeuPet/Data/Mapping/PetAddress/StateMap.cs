@@ -2,20 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CadeMeuPet.Data.Mapping
+namespace CadeMeuPet.Data.Mapping.PetAddress
 {
-    public class SizeMap : IEntityTypeConfiguration<Size>
+    public class StateMap : IEntityTypeConfiguration<State>
     {
-        public void Configure(EntityTypeBuilder<Size> builder)
+        public void Configure(EntityTypeBuilder<State> builder)
         {
 
-            builder.ToTable("Size");
+            builder.ToTable("Tb_State");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
+
+            builder.Property(x => x.UF)
+                .HasColumnName("UF")
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(2);
 
             builder.Property(x => x.Description)
                 .HasColumnName("Description")

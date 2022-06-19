@@ -6,6 +6,8 @@ namespace CadeMeuPet.Model
     public class Pet
     {
         public int Id { get; set; }
+        public int AccountId{ get; set; }
+        public virtual Account Account { get; set; }
         public string Name { get; set; }
         public int BreedId { get; set; }
         public virtual Breed PetBreed { get; set; }
@@ -18,7 +20,7 @@ namespace CadeMeuPet.Model
         public int ImageId { get; set; }
         public virtual IList<Image> Images { get; set; }
         public int AddressId { get; set; }
-        public virtual Address Address { get; set; }
+        public virtual Address oAddress { get; set; }
 
     }
 

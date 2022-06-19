@@ -37,19 +37,25 @@ namespace CadeMeuPet.Data.Mapping.PetAddress
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(50);
 
+            //builder.
+            //   .HasMany<City>(p => p.Cities)
+            //   .with(x => x.Address)
+            //   //.HasForeignKey<Address>(f => f.CityId)
+            //   .HasConstraintName("FK_Address_Cities")
+            //   .OnDelete(DeleteBehavior.Cascade);
+
             builder
-               .HasOne<City>(p => p.City)
-               .WithOne(x => x.Address)
-               .HasForeignKey<Address>(f => f.CityId)
-               .HasConstraintName("FK_Address_City");
-               
+               .HasMany<City>(p => p.Cities);
+               //.HasForeignKey<Address>(f => f.CityId)
+
+
 
             //builder
             //   .HasOne<State>(p => p.State)
             //   .WithOne(x => x.Address)
             //   .HasForeignKey<Address>(f => f.StateId)
             //   .HasConstraintName("FK_Address_State");
-               
+
 
         }
     }

@@ -21,7 +21,14 @@ namespace CadeMeuPet.Data.Mapping
                 .HasColumnName("Name")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
-            
+
+            builder
+               .HasOne<Account>(p => p.Account)
+               .WithOne(x => x.Pet)
+               .HasForeignKey<Pet>(f => f.AccountId)
+               .HasConstraintName("FK_Pet_Account")
+               .OnDelete(DeleteBehavior.Cascade);
+
             builder
                .HasOne<Breed>(p => p.PetBreed)
                .WithOne(x => x.Pet)

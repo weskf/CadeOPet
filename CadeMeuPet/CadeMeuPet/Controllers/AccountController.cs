@@ -5,6 +5,7 @@ using CadeMeuPet.Model;
 using CadeMeuPet.Services;
 using CadeMeuPet.ViewModel;
 using CadeMeuPet.ViewModel.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadeMeuPet.Controllers
@@ -31,7 +32,7 @@ namespace CadeMeuPet.Controllers
                     return BadRequest(response.MsgReturn);
 
                 else
-                    return Ok(response.MsgReturn.ToString());   
+                    return Ok(response);   
             }
             catch (Exception ex)
             {
@@ -41,8 +42,9 @@ namespace CadeMeuPet.Controllers
             }
         }
 
-        [HttpPatch("accounts")]
-        public async Task<IActionResult> UpdateAccount([FromBody] RegisterViewModel model,
+        [Authorize]
+        [HttpPatch("accounts/{id:int}")]
+        public async Task<IActionResult> UpdateAccount([FromBody] RegisterViewModel model, int id,
             [FromServices] DataContext context)
         {
             if (!ModelState.IsValid)
@@ -53,19 +55,19 @@ namespace CadeMeuPet.Controllers
             try
             {
                 AccountBusiness oAccountBusiness = new(context);
-                response = await oAccountBusiness.CreateAccount(model);
+                response = await oAccountBusiness.UpdateAccount(id, model);
 
                 if (response.HasError)
-                    return BadRequest(response.MsgReturn);
+                    return BadRequest(response);
 
                 else
-                    return Ok(response.MsgReturn.ToString());
+                    return Ok(response);
             }
             catch (Exception ex)
             {
                 response.HasError = true;
                 response.MsgReturn = "Houve um erro ao tentar realizar a chamada na API Accounts. Msg: " + ex.Message;
-                return BadRequest(response.MsgReturn);
+                return BadRequest(response);
             }
         }
 

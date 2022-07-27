@@ -11,5 +11,6 @@
         public string User { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public virtual Pet Pet { get; set; }
     }
 }

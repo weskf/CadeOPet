@@ -3,6 +3,7 @@ using CadeMeuPet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeMeuPet.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220612161220_UpdateTable_Tb_state")]
+    partial class UpdateTable_Tb_state
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,6 +123,9 @@ namespace CadeMeuPet.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId")
+                        .IsUnique();
+
                     b.ToTable("Tb_Address", (string)null);
                 });
 
@@ -151,9 +156,6 @@ namespace CadeMeuPet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -165,7 +167,8 @@ namespace CadeMeuPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("StateId")
+                        .IsUnique();
 
                     b.ToTable("Tb_City", (string)null);
                 });
@@ -221,9 +224,6 @@ namespace CadeMeuPet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
@@ -249,9 +249,6 @@ namespace CadeMeuPet.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId")
-                        .IsUnique();
 
                     b.HasIndex("AddressId");
 
@@ -297,9 +294,6 @@ namespace CadeMeuPet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -313,8 +307,6 @@ namespace CadeMeuPet.Migrations
                         .HasColumnName("UF");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("Tb_State", (string)null);
                 });
@@ -338,16 +330,28 @@ namespace CadeMeuPet.Migrations
                     b.ToTable("Tb_Status", (string)null);
                 });
 
-            modelBuilder.Entity("CadeMeuPet.Model.City", b =>
+            modelBuilder.Entity("CadeMeuPet.Model.Address", b =>
                 {
-                    b.HasOne("CadeMeuPet.Model.Address", "Address")
-                        .WithMany("Cities")
-                        .HasForeignKey("AddressId")
+                    b.HasOne("CadeMeuPet.Model.City", "City")
+                        .WithOne("Address")
+                        .HasForeignKey("CadeMeuPet.Model.Address", "CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Address_City");
 
-                    b.Navigation("Address");
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("CadeMeuPet.Model.City", b =>
+                {
+                    b.HasOne("CadeMeuPet.Model.State", "State")
+                        .WithOne("City")
+                        .HasForeignKey("CadeMeuPet.Model.City", "StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_City_States");
+
+                    b.Navigation("State");
                 });
 
             modelBuilder.Entity("CadeMeuPet.Model.Image", b =>
@@ -364,14 +368,7 @@ namespace CadeMeuPet.Migrations
 
             modelBuilder.Entity("CadeMeuPet.Model.Pet", b =>
                 {
-                    b.HasOne("CadeMeuPet.Model.Account", "Account")
-                        .WithOne("Pet")
-                        .HasForeignKey("CadeMeuPet.Model.Pet", "AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Pet_Account");
-
-                    b.HasOne("CadeMeuPet.Model.Address", "oAddress")
+                    b.HasOne("CadeMeuPet.Model.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -405,7 +402,7 @@ namespace CadeMeuPet.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Pet_Status");
 
-                    b.Navigation("Account");
+                    b.Navigation("Address");
 
                     b.Navigation("Color");
 
@@ -414,31 +411,6 @@ namespace CadeMeuPet.Migrations
                     b.Navigation("Size");
 
                     b.Navigation("Status");
-
-                    b.Navigation("oAddress");
-                });
-
-            modelBuilder.Entity("CadeMeuPet.Model.State", b =>
-                {
-                    b.HasOne("CadeMeuPet.Model.City", "City")
-                        .WithMany("States")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_City_States");
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("CadeMeuPet.Model.Account", b =>
-                {
-                    b.Navigation("Pet")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CadeMeuPet.Model.Address", b =>
-                {
-                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("CadeMeuPet.Model.Breed", b =>
@@ -449,7 +421,8 @@ namespace CadeMeuPet.Migrations
 
             modelBuilder.Entity("CadeMeuPet.Model.City", b =>
                 {
-                    b.Navigation("States");
+                    b.Navigation("Address")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CadeMeuPet.Model.Color", b =>
@@ -466,6 +439,12 @@ namespace CadeMeuPet.Migrations
             modelBuilder.Entity("CadeMeuPet.Model.Size", b =>
                 {
                     b.Navigation("Pet")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CadeMeuPet.Model.State", b =>
+                {
+                    b.Navigation("City")
                         .IsRequired();
                 });
 
